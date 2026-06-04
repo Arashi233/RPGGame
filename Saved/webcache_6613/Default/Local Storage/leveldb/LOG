@@ -1,6 +1,0 @@
-2026/06/01-16:45:52.334 26c4 Reusing MANIFEST C:\work\Unreal Projects\GAS\Saved\webcache_6613\Default\Local Storage\leveldb/MANIFEST-000001
-2026/06/01-16:45:52.338 26c4 Recovering log #60
-2026/06/01-16:45:52.340 26c4 Reusing old log C:\work\Unreal Projects\GAS\Saved\webcache_6613\Default\Local Storage\leveldb/000060.log 
-2026/06/04-11:02:10.026 26c4 Level-0 table #63: started
-2026/06/04-11:02:10.030 26c4 Level-0 table #63: 79472 bytes OK
-2026/06/04-11:02:10.031 26c4 Delete type=0 #60
