@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGameplayTags.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\GAS.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GAS.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\GASEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Source\GAS">
+      <UniqueIdentifier>{97478A1D-B0C3-325A-97ED-B0EDB1C75299}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GAS\GAS.Build.cs">
+      <Filter>Source\GAS</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\GAS\GAS.cpp">
+      <Filter>Source\GAS</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GAS\GAS.h">
+      <Filter>Source\GAS</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Private">
+      <UniqueIdentifier>{07D2B4D8-74BA-3DC0-98A4-8C3FAA8E4C8D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GAS\Private\AbilitySystem">
+      <UniqueIdentifier>{C03574C1-D88D-369B-AFA0-5361FB5F1D2F}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\AbilitySystem\AuraAbilitySystemComponent.cpp">
+      <Filter>Source\GAS\Private\AbilitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAS\Private\AbilitySystem\AuraAttributeSet.cpp">
+      <Filter>Source\GAS\Private\AbilitySystem</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\AbilitySystem\MMC">
+      <UniqueIdentifier>{3401E83A-FDB8-305C-A71A-3677463A18FF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\AbilitySystem\MMC\MMC_MaxHealth.cpp">
+      <Filter>Source\GAS\Private\AbilitySystem\MMC</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\Actor">
+      <UniqueIdentifier>{90B64921-BA6C-3194-84E1-F1AC32B2B351}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\Actor\AuraEffectActor.cpp">
+      <Filter>Source\GAS\Private\Actor</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\Character">
+      <UniqueIdentifier>{4EF9EA30-90BC-3C25-9978-6F8BAACF38A7}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\Character\AuraCharacter.cpp">
+      <Filter>Source\GAS\Private\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAS\Private\Character\AuraCharacterBase.cpp">
+      <Filter>Source\GAS\Private\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAS\Private\Character\AuraEnemy.cpp">
+      <Filter>Source\GAS\Private\Character</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\Game">
+      <UniqueIdentifier>{9DC087DF-1234-33C6-9077-7D94C9D4C01B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\Game\AuraGameModeBase.cpp">
+      <Filter>Source\GAS\Private\Game</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\Interaction">
+      <UniqueIdentifier>{F264882B-3D2D-3774-BF0F-AE1B5E03F831}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\Interaction\CombatInterface.cpp">
+      <Filter>Source\GAS\Private\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAS\Private\Interaction\EnemyInterface.cpp">
+      <Filter>Source\GAS\Private\Interaction</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\Player">
+      <UniqueIdentifier>{DE1867A1-199A-3315-934B-0CECD35A8F1E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\Player\AuraPlayerController.cpp">
+      <Filter>Source\GAS\Private\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAS\Private\Player\AuraPlayerState.cpp">
+      <Filter>Source\GAS\Private\Player</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\UI">
+      <UniqueIdentifier>{2791218B-6E32-3821-AE9C-EA078741B5CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GAS\Private\UI\HUD">
+      <UniqueIdentifier>{56557C6C-A849-3E6B-88A3-5E7F50735C0C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\UI\HUD\AuraHUD.cpp">
+      <Filter>Source\GAS\Private\UI\HUD</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\UI\WidgetController">
+      <UniqueIdentifier>{D64B95C8-A79D-3E45-AFBD-280C44054F56}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\UI\WidgetController\AuraWidgetController.cpp">
+      <Filter>Source\GAS\Private\UI\WidgetController</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAS\Private\UI\WidgetController\OverlayWidgetController.cpp">
+      <Filter>Source\GAS\Private\UI\WidgetController</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Private\UI\Widget">
+      <UniqueIdentifier>{C5FB7E7C-F338-3A07-89BB-620CF2232070}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAS\Private\UI\Widget\AuraUserWidget.cpp">
+      <Filter>Source\GAS\Private\UI\Widget</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAS\Public">
+      <UniqueIdentifier>{C98B1E92-6143-35D7-A8C5-B22E759D0638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GAS\Public\AbilitySystem">
+      <UniqueIdentifier>{8667D3A9-403E-3817-95F6-9FA75BBD742B}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\AbilitySystem\AuraAbilitySystemComponent.h">
+      <Filter>Source\GAS\Public\AbilitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GAS\Public\AbilitySystem\AuraAttributeSet.h">
+      <Filter>Source\GAS\Public\AbilitySystem</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\AbilitySystem\MMC">
+      <UniqueIdentifier>{F940C867-6480-3BDA-BFB1-8E234026CED7}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\AbilitySystem\MMC\MMC_MaxHealth.h">
+      <Filter>Source\GAS\Public\AbilitySystem\MMC</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\Actor">
+      <UniqueIdentifier>{29221C60-D9CE-3BD5-9EF9-7A62D626F9B8}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\Actor\AuraEffectActor.h">
+      <Filter>Source\GAS\Public\Actor</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\Character">
+      <UniqueIdentifier>{82AD7479-CD4A-3609-B517-96FF6D41C244}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\Character\AuraCharacter.h">
+      <Filter>Source\GAS\Public\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GAS\Public\Character\AuraCharacterBase.h">
+      <Filter>Source\GAS\Public\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GAS\Public\Character\AuraEnemy.h">
+      <Filter>Source\GAS\Public\Character</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\Game">
+      <UniqueIdentifier>{F1B48741-2A96-3321-9E3E-C0B413D49804}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\Game\AuraGameModeBase.h">
+      <Filter>Source\GAS\Public\Game</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\Interaction">
+      <UniqueIdentifier>{34486048-092D-3945-9B58-034C88C825EC}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\Interaction\CombatInterface.h">
+      <Filter>Source\GAS\Public\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GAS\Public\Interaction\EnemyInterface.h">
+      <Filter>Source\GAS\Public\Interaction</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\Player">
+      <UniqueIdentifier>{35F1F63C-C62D-3638-BFC8-9C6D33E1A7F8}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\Player\AuraPlayerController.h">
+      <Filter>Source\GAS\Public\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GAS\Public\Player\AuraPlayerState.h">
+      <Filter>Source\GAS\Public\Player</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\UI">
+      <UniqueIdentifier>{CD8F26E0-5171-3864-ACC8-EE9391CCC8F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GAS\Public\UI\HUD">
+      <UniqueIdentifier>{AC62EFE1-01A9-3D8C-BF66-E36EC1BA14CE}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\UI\HUD\AuraHUD.h">
+      <Filter>Source\GAS\Public\UI\HUD</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\UI\WidgetController">
+      <UniqueIdentifier>{20D0310B-8430-3406-A2BD-27742BAF0A22}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\UI\WidgetController\AuraWidgetController.h">
+      <Filter>Source\GAS\Public\UI\WidgetController</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GAS\Public\UI\WidgetController\OverlayWidgetController.h">
+      <Filter>Source\GAS\Public\UI\WidgetController</Filter>
+    </ClInclude>
+    <Filter Include="Source\GAS\Public\UI\Widget">
+      <UniqueIdentifier>{7925518C-875C-3FF0-9FFF-0492B9C274ED}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GAS\Public\UI\Widget\AuraUserWidget.h">
+      <Filter>Source\GAS\Public\UI\Widget</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

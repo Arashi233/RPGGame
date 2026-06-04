@@ -1,0 +1,36 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Character/AuraCharacterBase.h"
+#include "AuraCharacter.generated.h"
+
+/**
+ * 
+ */
+class UGameplayEffect;
+
+UCLASS()
+class GAS_API AAuraCharacter : public AAuraCharacterBase
+{
+	GENERATED_BODY()
+
+public:
+	AAuraCharacter();
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
+	/** Combat Interface **/
+	virtual int32 GetPlayerLevel() override;
+	/** End Combat Interface **/
+private:
+	virtual void InitAbilityActorInfo() override;
+
+protected:
+
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterAttributes")
+	TSubclassOf<UGameplayEffect> DefaultAttributes;
+};
