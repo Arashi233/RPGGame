@@ -20,6 +20,7 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+
 	
 }
 void AAuraCharacter::PossessedBy(AController* NewController)
@@ -27,6 +28,7 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 	//Init ability actor info on the server
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 }
 
 void AAuraCharacter::OnRep_PlayerState()
@@ -60,11 +62,17 @@ void AAuraCharacter::InitAbilityActorInfo()
 			AuraHUD->InitOverlay(AuraPlayerController, AuraPlayerState, AbilitySystemComponent, AttributeSet);
 		}
 	}
-
 	InitialDefaultAttributes();
 }
 
 void AAuraCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	UE_LOG(LogTemp, Warning,
+		TEXT("[%s] Mode=%d Speed=%.0f Velocity=%s"),
+		*GetName(),
+		GetCharacterMovement()->MovementMode,
+		GetCharacterMovement()->MaxWalkSpeed,
+		*GetVelocity().ToString());
 }
+

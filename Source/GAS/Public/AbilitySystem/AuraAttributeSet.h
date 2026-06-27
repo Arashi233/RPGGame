@@ -3,7 +3,6 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
-#include "GameFramework/Character.h"
 #include "AuraAttributeSet.generated.h"
 
 
@@ -12,6 +11,9 @@
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
+
+template<typename T>
+using TStaticFuncPtr = TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
 
 USTRUCT()
 struct FEffectProperties
@@ -59,6 +61,9 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)const override;
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttribute;
+
+
 
 	/*
 	 * Primary Attributes
@@ -151,13 +156,13 @@ public:
 	 * Primary Attributes
 	 */
 	UFUNCTION()
-	void OnRep_Strength(const FGameplayAttributeData& OldHealth) const;
+	void OnRep_Strength(const FGameplayAttributeData& OldStrength) const;
 	UFUNCTION()
-	void OnRep_Resilience(const FGameplayAttributeData& OldMaxHealth) const;
+	void OnRep_Resilience(const FGameplayAttributeData& OldResilience) const;
 	UFUNCTION()
-	void OnRep_Intelligence(const FGameplayAttributeData& OldMana) const;
+	void OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const;
 	UFUNCTION()
-	void OnRep_Vigor(const FGameplayAttributeData& OldMaxMana) const;
+	void OnRep_Vigor(const FGameplayAttributeData& OldVigor) const;
 
 	/*
 	 * Secondary Attributes 
@@ -167,25 +172,25 @@ public:
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const; 
 	UFUNCTION()
-	void OnRep_Armor(const FGameplayAttributeData& OldValue) const;
+	void OnRep_Armor(const FGameplayAttributeData& OldArmor) const;
 	UFUNCTION()
-	void OnRep_ArmorPenetration(const FGameplayAttributeData& OldValue) const;
+	void OnRep_ArmorPenetration(const FGameplayAttributeData& OldArmorPenetration) const;
 	UFUNCTION()
-	void OnRep_BlockChance(const FGameplayAttributeData& OldValue) const;
+	void OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const;
 	UFUNCTION()
-	void OnRep_CritChance(const FGameplayAttributeData& OldValue) const;
+	void OnRep_CritChance(const FGameplayAttributeData& OldCritChance) const;
 	UFUNCTION()
-	void OnRep_CritDamage(const FGameplayAttributeData& OldValue) const;
+	void OnRep_CritDamage(const FGameplayAttributeData& OldCritDamage) const;
 	UFUNCTION()
-	void OnRep_CritResistance(const FGameplayAttributeData& OldValue) const;
+	void OnRep_CritResistance(const FGameplayAttributeData& OldCritResistance) const;
 	UFUNCTION()
-	void OnRep_MoveSpeed(const FGameplayAttributeData& OldValue) const;
+	void OnRep_MoveSpeed(const FGameplayAttributeData& OldMoveSpeed) const;
 	UFUNCTION()
-	void OnRep_HealthRegen(const FGameplayAttributeData& OldValue) const;
+	void OnRep_HealthRegen(const FGameplayAttributeData& OldHealthRegen) const;
 	UFUNCTION()
-	void OnRep_ManaRegen(const FGameplayAttributeData& OldValue) const;
+	void OnRep_ManaRegen(const FGameplayAttributeData& OldManaRegen) const;
 	UFUNCTION()
-	void OnRep_CastSpeed(const FGameplayAttributeData& OldValue) const;
+	void OnRep_CastSpeed(const FGameplayAttributeData& OldCastSpeed) const;
 
 
 private:

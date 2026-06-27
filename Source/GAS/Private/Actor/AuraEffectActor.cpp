@@ -60,7 +60,7 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 	if(DurationApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap) {
 		ApplyEffectToTarget(TargetActor, DurationGameplayEffectClass);
 	}
-	if(InfiniteApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap) {
+	if(InfiniteApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap) { 
 		ApplyEffectToTarget(TargetActor, InfiniteGameplayEffectClass);
 	}
 	if(InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap) {

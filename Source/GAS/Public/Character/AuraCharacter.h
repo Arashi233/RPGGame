@@ -30,7 +30,6 @@ private:
 protected:
 
 	virtual void BeginPlay() override;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterAttributes")
 	TSubclassOf<UGameplayEffect> DefaultAttributes;
 };

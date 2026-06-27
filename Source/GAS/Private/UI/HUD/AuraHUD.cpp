@@ -10,11 +10,62 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 {
 	if (OverlayWidgetController == nullptr)
 	{
-		OverlayWidgetController = NewObject<UOverlayWidgetController>(this,OverlayWidgetControllerClass);
-		OverlayWidgetController->SetWidgetControllerParams(WCParams);
-		OverlayWidgetController->BindCallbacksToDependencies();
+		CreateOverlayWidgetController(WCParams);
 	}
 	return OverlayWidgetController;
+}
+
+UOverlayWidgetController* AAuraHUD::CreateOverlayWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (OverlayWidgetControllerClass == nullptr)
+	{
+		return nullptr;
+	}
+
+	OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+	InitializeOverlayWidgetController(WCParams);
+	return OverlayWidgetController;
+}
+
+void AAuraHUD::InitializeOverlayWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (OverlayWidgetController == nullptr)
+	{
+		return;
+	}
+	OverlayWidgetController->SetWidgetControllerParams(WCParams);
+	OverlayWidgetController->BindCallbacksToDependencies();
+}
+
+UAttributeMenuWidgetController* AAuraHUD::GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (AttributeMenuWidgetController == nullptr)
+	{
+		CreateAttributeMenuWidgetController(WCParams);
+	}
+	return AttributeMenuWidgetController;
+}
+
+UAttributeMenuWidgetController* AAuraHUD::CreateAttributeMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (AttributeMenuWidgetControllerClass == nullptr)
+	{
+		return nullptr;
+	}
+	AttributeMenuWidgetController = NewObject<UAttributeMenuWidgetController>(this, AttributeMenuWidgetControllerClass);
+	InitializeAttributeMenuWidgetController(WCParams);
+	return AttributeMenuWidgetController;
+}
+
+
+void AAuraHUD::InitializeAttributeMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if(AttributeMenuWidgetController == nullptr)
+	{
+		return;
+	}
+	AttributeMenuWidgetController->SetWidgetControllerParams(WCParams);
+	AttributeMenuWidgetController->BindCallbacksToDependencies();
 }
 
 void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
@@ -31,5 +82,6 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	OverlayWidget->SetWidgetController(WidgetController);
 	WidgetController->BroadcastInitialValues();
 	Widget->AddToViewport();
-
+	UE_LOG(LogTemp, Warning, TEXT("OverlayWidgetControllerClass: %s"),
+		*GetNameSafe(OverlayWidgetControllerClass));
 }

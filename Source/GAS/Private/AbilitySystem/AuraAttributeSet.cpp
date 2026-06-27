@@ -5,40 +5,35 @@
 
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "GameplayEffectExtension.h"
+#include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AuraGameplayTags.h"
 
-/*
- * 构造函数
- * - 在这里初始化属性的默认值（仅影响本地对象的初始值）
- * - 推荐在多人/网络场景中通过 GameplayEffect (GE) 来设置角色的初始属性，
- *   因为 GE 的应用会统一在服务器上执行并通过属性复制同步到客户端。
- */
 UAuraAttributeSet::UAuraAttributeSet()
 {
-	// 初始化默认值（仅本地默认）
-	// 注意：在网络游戏中，客户端在对应的属性 Replicate 到来之前可能会看到 0，
-	// 因此务必在服务器上尽早使用 GE 应用这些初始值，或者在客户端等待 RepNotify 后再显示 UI。
-	//InitHealth(50.f);
-	//InitMana(50.f);
+	const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
+	TagsToAttribute.Add(GameplayTags.Attribute_Primary_Strength, GetStrengthAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Primary_Resilience, GetResilienceAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Primary_Intelligence, GetIntelligenceAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Primary_Vigor, GetVigorAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_Armor, GetArmorAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_ArmorPenetration, GetArmorPenetrationAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_BlockChance, GetBlockChanceAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_CritChance, GetCritChanceAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_CritDamage, GetCritDamageAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_CritResistance, GetCritResistanceAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_HealthRegen, GetHealthRegenAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_ManaRegen, GetManaRegenAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_MoveSpeed, GetMoveSpeedAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_CastSpeed, GetCastSpeedAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_MaxHealth, GetMaxHealthAttribute);
+	TagsToAttribute.Add(GameplayTags.Attribute_Secondary_MaxMana, GetMaxManaAttribute);
+
 }
 
 
-/*
- * 将 GameplayEffect 回调数据封装到 FEffectProperties 中供后续使用。
- *
- * 参数说明：
- * - Data: GE 回调提供的上下文、被评估的数据与目标 ASC 引用。
- * - Props: 这里以值传递（按值）传入并在函数内部被赋值（注意：按值传递不会改变调用者的副本）。
- *   如果期望将结果返回给调用者，应改为传引用（FEffectProperties&）。
- *
- * 作用：
- * - 从 EffectSpecContext 获取 Source 的 AbilitySystemComponent、Avatar Actor、Controller 等信息。
- * - 从 Data.Target 获取 Target 的 Avatar 和 Controller 信息。
- *
- * 注意事项：
- * - 请检查 Props 按值传递是否是你的本意；当前实现修改的是本地副本，调用者不会看到修改结果。
- */
+
 void UAuraAttributeSet::SetFEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props)const
 {
 	// 从 EffectSpec 中获取 EffectContext（来源等）
@@ -126,13 +121,8 @@ void UAuraAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
-
 	// 当 Health 被修改时，确保新值在 [0, MaxHealth] 范围内
 	if (Attribute == GetHealthAttribute()) {
-		UE_LOG(LogTemp, Warning,
-			TEXT("Health=%f MaxHealth=%f"),
-			NewValue,
-			GetMaxHealth());
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
 	}
 	// 对 MaxHealth / MaxMana 的特殊处理可以在这里添加（例如确保最小值、当最大值变化时调整当前值等）
@@ -158,7 +148,6 @@ void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
-
 	// 收集 Effect 的相关信息（若需要）
 	FEffectProperties Props;
 	SetFEffectProperties(Data, Props);	
@@ -235,53 +224,53 @@ void UAuraAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) 
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, MaxMana, OldMaxMana);
 }
 
-void UAuraAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldArmor) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Armor, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Armor, OldArmor);
 }
 
-void UAuraAttributeSet::OnRep_ArmorPenetration(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_ArmorPenetration(const FGameplayAttributeData& OldArmorPenetration) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ArmorPenetration, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ArmorPenetration, OldArmorPenetration);
 }
 
-void UAuraAttributeSet::OnRep_BlockChance(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, BlockChance, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, BlockChance, OldBlockChance);
 }
 
-void UAuraAttributeSet::OnRep_CritChance(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_CritChance(const FGameplayAttributeData& OldCritChance) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritChance, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritChance, OldCritChance);
 }
 
-void UAuraAttributeSet::OnRep_CritDamage(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_CritDamage(const FGameplayAttributeData& OldCritDamage) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritDamage, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritDamage, OldCritDamage);
 }
 
-void UAuraAttributeSet::OnRep_CritResistance(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_CritResistance(const FGameplayAttributeData& OldCritResistance) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritResistance, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritResistance, OldCritResistance);
 }
 
-void UAuraAttributeSet::OnRep_MoveSpeed(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_MoveSpeed(const FGameplayAttributeData& OldMoveSpeed) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, MoveSpeed, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, MoveSpeed, OldMoveSpeed);
 }
 
-void UAuraAttributeSet::OnRep_HealthRegen(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_HealthRegen(const FGameplayAttributeData& OldHealthRegen) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, HealthRegen, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, HealthRegen, OldHealthRegen);
 }
 
-void UAuraAttributeSet::OnRep_ManaRegen(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_ManaRegen(const FGameplayAttributeData& OldManaRegen) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ManaRegen, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ManaRegen, OldManaRegen);
 }
 
-void UAuraAttributeSet::OnRep_CastSpeed(const FGameplayAttributeData& OldValue) const
+void UAuraAttributeSet::OnRep_CastSpeed(const FGameplayAttributeData& OldCastSpeed) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CastSpeed, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CastSpeed, OldCastSpeed);
 }
 
